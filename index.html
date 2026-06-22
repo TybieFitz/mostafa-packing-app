@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Good morning, Mostafa!</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#1a1c29">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pack Mostafa">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Fullscreen Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div id="app-container">
+    
+    <!-- WELCOME SCREEN -->
+    <section id="welcome-screen" class="screen active">
+      <div class="welcome-header">
+        <h1>Good morning, Mostafa!</h1>
+      </div>
+      <div class="mode-buttons-container">
+        <button class="mode-btn btn-manual" data-mode="manual">
+          <div class="btn-content">
+            <span class="btn-title">Manual Bike</span>
+          </div>
+        </button>
+        <button class="mode-btn btn-electric" data-mode="electric">
+          <div class="btn-content">
+            <span class="btn-title">Electric Bike</span>
+          </div>
+        </button>
+        <button class="mode-btn btn-lime" data-mode="lime">
+          <div class="btn-content">
+            <span class="btn-title">Lime Bike</span>
+          </div>
+        </button>
+        <button class="mode-btn btn-car" data-mode="car">
+          <div class="btn-content">
+            <span class="btn-title">Car</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- PACKING SCREEN -->
+    <section id="packing-screen" class="screen">
+      <header class="packing-header">
+        <button id="back-btn" class="icon-btn" aria-label="Go back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <div class="packing-title-group">
+          <span class="packing-subtitle" id="selected-mode-text">Mode selected</span>
+          <h2>Let's Get Packed</h2>
+        </div>
+      </header>
+
+      <!-- Progress Section -->
+      <div class="progress-container">
+        <div class="progress-bar-wrapper">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div class="progress-labels">
+          <span id="progress-text">0 of 0 packed</span>
+          <span id="progress-percentage">0%</span>
+        </div>
+      </div>
+
+      <!-- Checklist Section -->
+      <div class="checklist-wrapper">
+        <ul id="packing-checklist" class="checklist">
+          <!-- Dynamic Items inserted by JS -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEND-OFF SCREEN -->
+    <section id="send-off-screen" class="screen">
+      <div class="sendoff-card">
+        <div class="heart-animation">❤️</div>
+        <h1 class="sendoff-text">Have a great day, Mostafa!<br><span class="loved-highlight">You are loved!</span></h1>
+        <button id="reset-btn" class="reset-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+          </svg>
+          Start Over
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
