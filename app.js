@@ -1,15 +1,26 @@
 // Mostafa's Morning Packing App Logic
 
 // Checklist items definition
-const ALL_ITEMS = [
-  { id: 'lights', text: 'Bike lights charged' },
+const BASE_ITEMS = [
+  { id: 'belt', text: 'Belt' },
+  { id: 'phone', text: 'Phone' },
+  { id: 'wallet', text: 'Wallet' },
+  { id: 'keys', text: 'Keys' },
   { id: 'laptop', text: 'Laptop' },
-  { id: 'lunchbox', text: 'Lunchbox' },
-  { id: 'lunchcup', text: 'Lunchcup' },
-  { id: 'street_clothes', text: 'Street clothes' },
-  { id: 'bike_shoes', text: 'Bike shoes' },
-  { id: 'street_shoes', text: 'Street shoes' }
+  { id: 'lunch', text: 'Lunch' },
+  { id: 'badge', text: 'Badge' }
 ];
+
+const BIKE_ITEMS = [
+  { id: 'headphones', text: 'Headphones' },
+  { id: 'garage_opener', text: 'Garage door opener' }
+];
+
+const MANUAL_BIKE_ITEMS = [
+  { id: 'clothes', text: 'Clothes' },
+  { id: 'shoes', text: 'Shoes' }
+];
+
 
 // App State
 let state = {
@@ -111,6 +122,13 @@ function navigateTo(targetScreen, direction = 'forward') {
 
 // Restore saved screen state on initial load
 function restoreScreen() {
+  // Reset state if accessing welcome screen on initial load
+  if (state.currentScreen === 'welcome') {
+    state.mode = null;
+    state.checkedItems = [];
+    saveState();
+  }
+
   // Hide all screens
   Object.values(screens).forEach(el => {
     el.classList.remove('active', 'exit');
@@ -123,6 +141,9 @@ function restoreScreen() {
   } else {
     screens.welcome.classList.add('active');
     state.currentScreen = 'welcome';
+    state.mode = null;
+    state.checkedItems = [];
+    saveState();
   }
   
   // If we restore onto packing screen, setup and render the list
@@ -150,6 +171,7 @@ function setupEventListeners() {
   // Back button in checklist
   backButton.addEventListener('click', () => {
     state.checkedItems = [];
+    state.mode = null;
     saveState();
     navigateTo('welcome', 'backward');
   });
@@ -170,7 +192,14 @@ function setupEventListeners() {
 
 // Filter items based on selected transportation mode
 function getItemsForMode(mode) {
-  return ALL_ITEMS;
+  let items = [...BASE_ITEMS];
+  if (mode === 'manual' || mode === 'electric') {
+    items = items.concat(BIKE_ITEMS);
+  }
+  if (mode === 'manual') {
+    items = items.concat(MANUAL_BIKE_ITEMS);
+  }
+  return items;
 }
 
 // Get clean mode title
@@ -178,7 +207,6 @@ function getModeTitle(mode) {
   const titles = {
     manual: 'Manual Bike',
     electric: 'Electric Bike',
-    lime: 'Lime Bike',
     car: 'Car'
   };
   return titles[mode] || mode;

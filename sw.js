@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mostafa-packing-v9';
+const CACHE_NAME = 'mostafa-packing-v10';
 const ASSETS_TO_CACHE = [
   './',
   'index.html',
